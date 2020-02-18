@@ -34,7 +34,7 @@ class JyankeGamePage extends Component {
   }
   render() {
     const tabStyle= {width: 200, height: 50, textAlign: 'center', color: '#fff', backgroundColor: '#01bcd4', borderRadius: 0}
-    const activeStyle = (path) => Object.assign({borderBottom: `solid 2px ${this.props.location.pathname.match(path) ? '#f00' : '#01bcd4'}`}, tabStyle)
+    const activeStyle = (path) => Obect.assign({borderBottom: `solid 2px ${this.props.location.pathname.match(path) ? '#f00' : '#01bcd4'}`}, tabStyle)
     return (
         <div style={{marginLeft: 30}}>
           <Header>じゃんけん ポン！</Header>
