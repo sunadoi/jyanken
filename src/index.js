@@ -11,17 +11,14 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Jyanken from './Jyanken'
 
+
 class JyankeGamePage extends Component {
   constructor(props) {
     super(props)
     this.jyanken = new Jyanken()
-    this.state = {scores: [], status: {}, tabIndex: 0}
+    this.state = {scores: [], status: {}}
   }
   componentDidMount() {
-    this.getResult()
-  }
-  tabChange(ix) {
-    this.setState({tabIndex: ix})
     this.getResult()
   }
   getResult() {
@@ -34,23 +31,22 @@ class JyankeGamePage extends Component {
   }
   render() {
     const tabStyle= {width: 200, height: 50, textAlign: 'center', color: '#fff', backgroundColor: '#01bcd4', borderRadius: 0}
-    const activeStyle = (path) => Obect.assign({borderBottom: `solid 2px ${this.props.location.pathname.match(path) ? '#f00' : '#01bcd4'}`}, tabStyle)
+    const activeStyle = (path) => Object.assign({borderBottom: `solid 2px ${this.props.location.pathname.match(path) ? '#f00' : '#01bcd4'}`}, tabStyle)
     return (
-        <div style={{marginLeft: 30}}>
-          <Header>じゃんけん ポン！</Header>
-          <JyankenBox actionPon={(te) => this.pon(te)} />
-          <Paper style={{width: 400}} zdepth={2}>
+      <div style={{marginLeft: 30}}>
+        <Header>じゃんけん ポン！</Header>
+        <JyankenBox actionPon={(te) => this.pon(te)} />
+        <Paper style={{width: 400}} zdepth={2}>
           <Link id="tab-scores" to="/scores" style={{textDecoration: 'none'}}><Button style={activeStyle('scores')}>対戦結果</Button></Link>
           <Link id="tab-status" to="/status" style={{textDecoration: 'none'}}><Button style={activeStyle('status')}>対戦成績</Button></Link>
           <Route path="/scores" component={() => <ScoreList scores={this.state.scores} />}/>
           <Route path="/status" component={() => <StatusBox status={this.state.status} />}/>
           <Route exact path="/" component={() => <Redirect to="/scores" />}/>
         </Paper>
-        </div>
+      </div>
     )
   }
 }
-
 JyankeGamePage.propTypes = {
   location: PropTypes.object
 }
@@ -79,7 +75,6 @@ StatusBox.propTypes = {
   status: PropTypes.object
 }
 
-
 const JyankenBox = (props) => {
   const style = {marginLeft: 20}
   return (
@@ -90,7 +85,6 @@ const JyankenBox = (props) => {
     </div>
   )
 }
-
 JyankenBox.propTypes = {
   actionPon: PropTypes.func
 }
@@ -107,7 +101,6 @@ const ScoreList = (props) => (
     </TableBody>
   </Table>
 )
-
 ScoreList.propTypes = {
   scores: PropTypes.array
 }
@@ -125,7 +118,6 @@ const ScoreListItem = (props) => {
     </TableRow>
   )
 }
-
 ScoreListItem.propTypes = {
   score: PropTypes.object
 }
